@@ -2,6 +2,61 @@
 <ArrayOfShape xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Shape xsi:type="Circle">
     <identifier>C0</identifier>
-    <radium>1</radium>
+    <radium>100</radium>
+  </Shape>
+  <Shape xsi:type="Rectangle">
+    <identifier>R1</identifier>
+    <lenght>100</lenght>
+    <width>100</width>
+  </Shape>
+  <Shape xsi:type="Triangle">
+    <identifier>T2</identifier>
+    <sideA>1</sideA>
+    <sideB>2</sideB>
+    <sideC>3</sideC>
+  </Shape>
+  <Shape xsi:type="Circle">
+    <identifier>C3</identifier>
+    <radium>15</radium>
+  </Shape>
+  <Shape xsi:type="Circle">
+    <identifier>C4</identifier>
+    <radium>10</radium>
+  </Shape>
+  <Shape xsi:type="Circle">
+    <identifier>C5</identifier>
+    <radium>11</radium>
+  </Shape>
+  <Shape xsi:type="Circle">
+    <identifier>C6</identifier>
+    <radium>12</radium>
+  </Shape>
+  <Shape xsi:type="Circle">
+    <identifier>C7</identifier>
+    <radium>13</radium>
+  </Shape>
+  <Shape xsi:type="Circle">
+    <identifier>C8</identifier>
+    <radium>14</radium>
+  </Shape>
+  <Shape xsi:type="Circle">
+    <identifier>C9</identifier>
+    <radium>15</radium>
+  </Shape>
+  <Shape xsi:type="Circle">
+    <identifier>C10</identifier>
+    <radium>16</radium>
+  </Shape>
+  <Shape xsi:type="Circle">
+    <identifier>C11</identifier>
+    <radium>17</radium>
+  </Shape>
+  <Shape xsi:type="Circle">
+    <identifier>C12</identifier>
+    <radium>18</radium>
+  </Shape>
+  <Shape xsi:type="Circle">
+    <identifier>C13</identifier>
+    <radium>19</radium>
   </Shape>
 </ArrayOfShape>

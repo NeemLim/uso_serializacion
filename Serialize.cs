@@ -31,7 +31,7 @@ namespace uso_serializacion
                 correctInput = choice switch
                 {
                     //ASCII Value of Chars 1 to 3.
-                    var x when (x >= 49 & x <= 52) => true,
+                    var x when (x >= 48 & x <= 51) => true,
                     _ => false,
                 };
                 WriteLine("");
@@ -40,7 +40,8 @@ namespace uso_serializacion
             switch (choice)
             {
                 case '1': //Add shapes.
-                    #region SerializeVariables
+                    #region Variables
+                    int shapesToGenerate = GetIntInput();
                     var shapeList = new List<Shape>();
                     #endregion
 
@@ -53,20 +54,22 @@ namespace uso_serializacion
                     }
                     #endregion
 
-                    #region AddShape
-                    Shape userShape = null;
-                    int shapeCount = shapeList.Count; 
-                    createShape(ref userShape, shapeCount);
-                    userShape.getParamaters(); 
-                    shapeList.Add(userShape);
+                    #region CreateShape
+                    for (int N = 0; N < shapesToGenerate; N++)
+                    {
+                        Shape userShape = null;
+                        int shapeCount = shapeList.Count;
+                        createShape(ref userShape, shapeCount);
+                        userShape.getParamaters();
+                        shapeList.Add(userShape);
+                    }
                     #endregion
 
                     #region Serialize
                     using (FileStream stream = new FileStream(shapeListFilePath, FileMode.Create))
-                    {
                         XmlSerializer.Serialize(stream, shapeList);
-                    }
                     #endregion
+
                     break;
 
                 case '2': //Delete current file
@@ -106,13 +109,15 @@ namespace uso_serializacion
         static void createShape(ref Shape chosenShape, int itemCount)
         {
             char choice = 'x';
+            WriteLine("\nShape Menu");
+            WriteLine("C = Circle");
+            WriteLine("R = Rectangle");
+            WriteLine("T = Triangle");
             do
             {
-                WriteLine("\nShape Menu");
-                WriteLine("C = Circle");
-                WriteLine("R = Rectangle");
-                WriteLine("T = Triangle");
-                Write("Select your shape: ");
+
+                WriteLine("Select a valid shape.");
+                Write("Shape choice: ");
                 choice = ReadKey().KeyChar;
                 choice = char.ToUpper(choice);
 
@@ -126,14 +131,41 @@ namespace uso_serializacion
             } while (chosenShape == null);
 
             //Set ID for shape, first char + total item count.
-            chosenShape.identifier = 
-            char.ToString(choice) + itemCount.ToString();
+            chosenShape.identifier = char.ToString(choice) + itemCount.ToString();
 
 
             WriteLine("");
         }
 
+        static int GetIntInput()
+        {
+            bool isValidInt = false;
+            int userInput = 0;
+            WriteLine("Input the number of shapes to be created");
+            do
+            { //Loop to get the desired input.
+              //Checks for an int.
+                Write("\bBetween 1 and 1000: ");
+                isValidInt = int.TryParse(
+                    ReadLine(), out userInput
+                );
 
+                //Checks for integer to meet the constrainsts.
+                if (userInput <= 1000 & userInput > 0)
+                {
+                    WriteLine($"Great! You will be asked for {userInput} shape(s)");
+                }
+                else
+                {
+                    //sets flag false to avoid the exiting loop.
+                    isValidInt = false;
+                    WriteLine("Nah, try again.");
+                }
+
+            } while (isValidInt == false);
+
+            return userInput;
+        }
 
 
 

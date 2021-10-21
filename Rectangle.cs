@@ -7,7 +7,7 @@ namespace uso_serializacion
         {
             WriteLine("Input the lenght of the rectangle.");
             lenght = UserInput();
-            WriteLine("Input the lenght of the rectangle.");
+            WriteLine("Input the width of the rectangle.");
             width = UserInput();
         }
 
