@@ -1,0 +1,16 @@
+C:\Semestre7\Progra-Avanzada\P2\uso_serializacion\bin\Debug\net5.0\uso_serializacion.exe
+C:\Semestre7\Progra-Avanzada\P2\uso_serializacion\bin\Debug\net5.0\uso_serializacion.deps.json
+C:\Semestre7\Progra-Avanzada\P2\uso_serializacion\bin\Debug\net5.0\uso_serializacion.runtimeconfig.json
+C:\Semestre7\Progra-Avanzada\P2\uso_serializacion\bin\Debug\net5.0\uso_serializacion.runtimeconfig.dev.json
+C:\Semestre7\Progra-Avanzada\P2\uso_serializacion\bin\Debug\net5.0\uso_serializacion.dll
+C:\Semestre7\Progra-Avanzada\P2\uso_serializacion\bin\Debug\net5.0\ref\uso_serializacion.dll
+C:\Semestre7\Progra-Avanzada\P2\uso_serializacion\bin\Debug\net5.0\uso_serializacion.pdb
+C:\Semestre7\Progra-Avanzada\P2\uso_serializacion\obj\Debug\net5.0\uso_serializacion.csproj.AssemblyReference.cache
+C:\Semestre7\Progra-Avanzada\P2\uso_serializacion\obj\Debug\net5.0\uso_serializacion.GeneratedMSBuildEditorConfig.editorconfig
+C:\Semestre7\Progra-Avanzada\P2\uso_serializacion\obj\Debug\net5.0\uso_serializacion.AssemblyInfoInputs.cache
+C:\Semestre7\Progra-Avanzada\P2\uso_serializacion\obj\Debug\net5.0\uso_serializacion.AssemblyInfo.cs
+C:\Semestre7\Progra-Avanzada\P2\uso_serializacion\obj\Debug\net5.0\uso_serializacion.csproj.CoreCompileInputs.cache
+C:\Semestre7\Progra-Avanzada\P2\uso_serializacion\obj\Debug\net5.0\uso_serializacion.dll
+C:\Semestre7\Progra-Avanzada\P2\uso_serializacion\obj\Debug\net5.0\ref\uso_serializacion.dll
+C:\Semestre7\Progra-Avanzada\P2\uso_serializacion\obj\Debug\net5.0\uso_serializacion.pdb
+C:\Semestre7\Progra-Avanzada\P2\uso_serializacion\obj\Debug\net5.0\uso_serializacion.genruntimeconfig.cache
