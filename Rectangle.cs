@@ -14,11 +14,12 @@ namespace uso_serializacion
             WriteLine("Input the width of the rectangle.");
             width = UserInput();
         }
-        public override void GetArea()
+        public override double GetArea()
         {
             //A = π * r^2
             area = lenght * width; 
             area = Round(area, 2); 
+            return area; 
         }
 
 

@@ -12,11 +12,12 @@ namespace uso_serializacion
             WriteLine("Input the radium of the circle.");
             radius = UserInput();
         }
-        public override void GetArea()
+        public override double GetArea()
         {
             //A = π * r^2
             area = radius * radius * PI; 
             area = Round(area, 2); 
+            return area; 
         }
 
     }

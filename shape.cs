@@ -14,7 +14,7 @@ namespace uso_serializacion
         public string identifier { get; set; }
         public double area { get; set; }
         public abstract void GetParamaters();
-        public abstract void GetArea();
+        public abstract double GetArea();
 
         public double UserInput()
         {

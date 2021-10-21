@@ -130,11 +130,18 @@ namespace uso_serializacion
                             {
                                 if (item.GetType().Equals(shapeType)) //Matches with selected type.
                                 {
-                                item.GetArea();
-                                WriteLine($"Area of {item.identifier} is equal to {item.area} square units.");
+                                    WriteLine($"Area of {item.identifier} is equal to {item.GetArea()} square units.");
                                 }
                             }
-                        break; 
+                            break;
+                        case '3':
+                        string userShapeId = UserShapeId(); 
+                            foreach (var item in loadedShapes)
+                            {
+                                if (item.identifier == userShapeId)
+                                    WriteLine($"Area of {item.identifier} is equal to {item.GetArea()} square units.");
+                            }
+                            break;
 
                     }
 
@@ -149,10 +156,6 @@ namespace uso_serializacion
 
             }
         }
-
-
-
-
 
         static void createShape(ref Shape chosenShape, int itemCount)
         {
@@ -243,6 +246,13 @@ namespace uso_serializacion
 
             return shapeType;
 
+        }
+
+        static string UserShapeId()
+        {
+            WriteLine("Input the ID of the shape: ");
+            string shapeId = ReadLine();
+            return shapeId;
         }
 
     }

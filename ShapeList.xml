@@ -21,4 +21,11 @@
     <lenght>1</lenght>
     <width>2</width>
   </Shape>
+  <Shape xsi:type="Triangle">
+    <identifier>T4</identifier>
+    <area>0</area>
+    <sideA>3</sideA>
+    <sideB>3</sideB>
+    <sideC>3</sideC>
+  </Shape>
 </ArrayOfShape>
