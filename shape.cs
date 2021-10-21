@@ -11,6 +11,7 @@ namespace uso_serializacion
     [Serializable]
     public abstract class Shape
     {
+        public string identifier { get; set; }
         public abstract void getParamaters();
 
         public double UserInput()

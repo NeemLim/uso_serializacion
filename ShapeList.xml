@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ArrayOfShape xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Shape xsi:type="Circle">
+    <identifier>C0</identifier>
+    <radium>1</radium>
+  </Shape>
+</ArrayOfShape>

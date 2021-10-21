@@ -12,32 +12,36 @@ namespace uso_serializacion
     {
         static void Main(string[] args)
         {
-            char choice = '0';
+            #region Variables
+            string shapeListFilePath = Combine(CurrentDirectory, "ShapeList.xml");
+            var XmlSerializer = new XmlSerializer(typeof(List<Shape>));
+            char choice = 'x';
             bool correctInput = false;
+            #endregion
             do
             {
                 WriteLine("\n --- Main menu --- ");
                 WriteLine("1 = Create or add shapes to ShapeList.xml");
                 WriteLine("2 = Delete current file");
                 WriteLine("3 = Calculate Area");
-                Write("Select your shape: ");
+                WriteLine("0 = Finish program");
+                Write(">Choice: ");
                 choice = ReadKey().KeyChar;
 
                 correctInput = choice switch
                 {
                     //ASCII Value of Chars 1 to 3.
-                    var x when (x >= 49 & x <= 51) => true,
+                    var x when (x >= 49 & x <= 52) => true,
                     _ => false,
                 };
+                WriteLine("");
             } while (correctInput == false);
 
             switch (choice)
             {
-                case '1':
-                    #region Variables
-                    string shapeListFilePath = Combine(CurrentDirectory, "ShapeList.xml");
+                case '1': //Add shapes.
+                    #region SerializeVariables
                     var shapeList = new List<Shape>();
-                    var XmlSerializer = new XmlSerializer(typeof(List<Shape>));
                     #endregion
 
                     #region LoadXML
@@ -51,8 +55,9 @@ namespace uso_serializacion
 
                     #region AddShape
                     Shape userShape = null;
-                    getShape(ref userShape);
-                    userShape.getParamaters();
+                    int shapeCount = shapeList.Count; 
+                    createShape(ref userShape, shapeCount);
+                    userShape.getParamaters(); 
                     shapeList.Add(userShape);
                     #endregion
 
@@ -62,8 +67,35 @@ namespace uso_serializacion
                         XmlSerializer.Serialize(stream, shapeList);
                     }
                     #endregion
-
                     break;
+
+                case '2': //Delete current file
+                    if (File.Exists(shapeListFilePath) == true)
+                    {
+                        File.Delete(shapeListFilePath);
+                        WriteLine("Deletion succesful.");
+                    }
+                    else
+                        WriteLine("No file to delete.");
+                    break;
+
+                case '3':
+                    #region deserialize
+                    using (FileStream xmlLoad = File.Open(shapeListFilePath, FileMode.Open))
+                    {
+                        // deserialize and cast the object graph into a List of Person 
+                        var loadedPeople = (List<Shape>)XmlSerializer.Deserialize(xmlLoad);
+                        foreach (Circle item in loadedPeople)
+                        {
+                            WriteLine(item.radium);
+                        }
+                    }
+                    #endregion
+                    break;
+
+                case '0':
+                    WriteLine("\nThank you, goodbye.");
+                    return;
             }
 
 
@@ -71,8 +103,9 @@ namespace uso_serializacion
 
         }
 
-        static void getShape(ref Shape chosenShape)
+        static void createShape(ref Shape chosenShape, int itemCount)
         {
+            char choice = 'x';
             do
             {
                 WriteLine("\nShape Menu");
@@ -80,9 +113,9 @@ namespace uso_serializacion
                 WriteLine("R = Rectangle");
                 WriteLine("T = Triangle");
                 Write("Select your shape: ");
-                char choice = ReadKey().KeyChar;
-
+                choice = ReadKey().KeyChar;
                 choice = char.ToUpper(choice);
+
                 chosenShape = choice switch
                 {
                     'C' => new Circle(),
@@ -91,8 +124,15 @@ namespace uso_serializacion
                     _ => null
                 };
             } while (chosenShape == null);
+
+            //Set ID for shape, first char + total item count.
+            chosenShape.identifier = 
+            char.ToString(choice) + itemCount.ToString();
+
+
             WriteLine("");
         }
+
 
 
 
