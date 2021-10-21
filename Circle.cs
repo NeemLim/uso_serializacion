@@ -7,7 +7,7 @@ namespace uso_serializacion
     public class Circle : Shape
     {
         public double radius { get; set; }
-        public override void GetParamaters()
+        public override void DefineAttributes()
         {
             WriteLine("Input the radium of the circle.");
             radius = UserInput();

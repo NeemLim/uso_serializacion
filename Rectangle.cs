@@ -7,7 +7,7 @@ namespace uso_serializacion
     {
         public double lenght { get; set; }
         public double width { get; set; }
-        public override void GetParamaters()
+        public override void DefineAttributes()
         {
             WriteLine("Input the lenght of the rectangle.");
             lenght = UserInput();

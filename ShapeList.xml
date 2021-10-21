@@ -27,5 +27,20 @@
     <sideA>3</sideA>
     <sideB>3</sideB>
     <sideC>3</sideC>
+    <Type>0</Type>
+  </Shape>
+  <Shape xsi:type="Rectangle">
+    <identifier>R5</identifier>
+    <area>0</area>
+    <lenght>4</lenght>
+    <width>4</width>
+  </Shape>
+  <Shape xsi:type="Triangle">
+    <identifier>T6</identifier>
+    <area>0</area>
+    <sideA>5</sideA>
+    <sideB>5</sideB>
+    <sideC>6</sideC>
+    <Type>1</Type>
   </Shape>
 </ArrayOfShape>

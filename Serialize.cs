@@ -12,6 +12,7 @@ namespace uso_serializacion
     {
         static void Main(string[] args)
         {
+
             #region Variables
             string shapeListFilePath = Combine(CurrentDirectory, "ShapeList.xml");
             var XmlSerializer = new XmlSerializer(typeof(List<Shape>));
@@ -47,7 +48,6 @@ namespace uso_serializacion
                     int shapesToGenerate = GetIntInput();
                     var shapeList = new List<Shape>();
                     #endregion
-
                     #region LoadXML
                     //Check if shapes.xml exists, deserialize and load it to current list of shapes.
                     if (File.Exists(shapeListFilePath) == true)
@@ -63,7 +63,7 @@ namespace uso_serializacion
                         Shape userShape = null;
                         int shapeCount = shapeList.Count;
                         createShape(ref userShape, shapeCount);
-                        userShape.GetParamaters();
+                        userShape.DefineAttributes();
                         shapeList.Add(userShape);
                     }
                     #endregion
@@ -111,40 +111,55 @@ namespace uso_serializacion
                     #region GetArea
                     using (FileStream xmlLoad = File.Open(shapeListFilePath, FileMode.Open))
                     {
-                        // deserialize and cast the object graph into a List of Person 
                         loadedShapes = (List<Shape>)XmlSerializer.Deserialize(xmlLoad);
                     }
                     switch (choice)
                     {
                         case '1':
-                            foreach (var item in loadedShapes)
-                            {
-                                item.GetArea();
-                                WriteLine($"Area of {item.identifier} is equal to {item.area} square units.");
-                            }
+                            ReadArea(ref loadedShapes);
                             break;
 
                         case '2':
+                            #region TriangleMenu
                             Type shapeType = SelectShapeType();
-                            foreach (var item in loadedShapes)
+                            if (shapeType == typeof(Triangle))
                             {
-                                if (item.GetType().Equals(shapeType)) //Matches with selected type.
+                                do
                                 {
-                                    WriteLine($"Area of {item.identifier} is equal to {item.GetArea()} square units.");
-                                }
+                                    WriteLine("\n --- Triangle menu --- ");
+                                    WriteLine("0 = Area of all triangles");
+                                    WriteLine("1 = Area of equilateral triangles");
+                                    WriteLine("2 = Area of isosceles triangles");
+                                    WriteLine("3 = Area of scalene triangles");
+                                    Write(">Choice: ");
+                                    choice = ReadKey().KeyChar;
+                                    correctInput = choice switch
+                                    {
+                                        //ASCII Value of Chars 0 to 3.
+                                        var x when (x >= 48 & x <= 51) => true,
+                                        _ => false,
+                                    };
+                                    WriteLine("");
+
+                                } while (correctInput == false);
+                                #endregion
+                                if (choice == 48)
+                                    ReadArea(ref loadedShapes, shapeType);
+                                else
+                                    ReadArea(ref loadedShapes, shapeType, choice);
                             }
+                            else //Rectangle or circle type.
+                                ReadArea(ref loadedShapes, shapeType);
+
+
                             break;
                         case '3':
-                        string userShapeId = UserShapeId(); 
-                            foreach (var item in loadedShapes)
-                            {
-                                if (item.identifier == userShapeId)
-                                    WriteLine($"Area of {item.identifier} is equal to {item.GetArea()} square units.");
-                            }
+                            string userShapeId = UserShapeId();
+                            ReadArea(ref loadedShapes);
+                            /* else
+                                WriteLine($"Shape with ID = {userShapeId}  was not found"); */
                             break;
-
                     }
-
                     #endregion
 
                     break;
@@ -216,6 +231,32 @@ namespace uso_serializacion
             } while (isValidInt == false);
 
             return userInput;
+        }
+
+        static void ReadArea(ref List<Shape> loadedShapes)
+        {
+            foreach (var item in loadedShapes)
+                WriteLine($"Area of {item.identifier} is equal to {item.GetArea()} square units.");
+        }
+
+        static void ReadArea(ref List<Shape> loadedShapes, Type shapeType)
+        {
+            foreach (var item in loadedShapes)
+                if (item.GetType().Equals(shapeType)) //Matches with selected type.
+                    WriteLine($"Area of {item.identifier} is equal to {item.GetArea()} square units.");
+
+        }
+        
+        static void ReadArea(ref List<Shape> loadedShapes, Type shapeType, char choice)
+        {
+            int triangleType = (int)choice;
+            foreach (var item in loadedShapes)
+                if (item.GetType().Equals(shapeType)) //Matches with selected type.
+                {
+                    Triangle currentTriangle = item as Triangle;
+                    if (currentTriangle.Type == triangleType)
+                        WriteLine($"Area of {item.identifier} is equal to {item.GetArea()} square units.");
+                }
         }
 
         static Type SelectShapeType()
