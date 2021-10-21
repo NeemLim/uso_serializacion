@@ -2,45 +2,60 @@
 <ArrayOfShape xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Shape xsi:type="Circle">
     <identifier>C0</identifier>
-    <area>0</area>
-    <radius>1</radius>
-  </Shape>
-  <Shape xsi:type="Circle">
-    <identifier>C1</identifier>
-    <area>0</area>
-    <radius>2</radius>
-  </Shape>
-  <Shape xsi:type="Circle">
-    <identifier>C2</identifier>
-    <area>0</area>
-    <radius>3</radius>
+    <area>706.86</area>
+    <radius>15</radius>
   </Shape>
   <Shape xsi:type="Rectangle">
-    <identifier>R3</identifier>
-    <area>0</area>
-    <lenght>1</lenght>
-    <width>2</width>
+    <identifier>R1</identifier>
+    <area>200</area>
+    <lenght>10</lenght>
+    <width>20</width>
   </Shape>
   <Shape xsi:type="Triangle">
-    <identifier>T4</identifier>
-    <area>0</area>
+    <identifier>T2</identifier>
+    <area>3.9</area>
     <sideA>3</sideA>
     <sideB>3</sideB>
     <sideC>3</sideC>
-    <Type>0</Type>
+    <Type>1</Type>
   </Shape>
-  <Shape xsi:type="Rectangle">
-    <identifier>R5</identifier>
-    <area>0</area>
-    <lenght>4</lenght>
-    <width>4</width>
+  <Shape xsi:type="Circle">
+    <identifier>C3</identifier>
+    <area>28.27</area>
+    <radius>3</radius>
+  </Shape>
+  <Shape xsi:type="Circle">
+    <identifier>C4</identifier>
+    <area>28.27</area>
+    <radius>3</radius>
+  </Shape>
+  <Shape xsi:type="Circle">
+    <identifier>C5</identifier>
+    <area>113.1</area>
+    <radius>6</radius>
   </Shape>
   <Shape xsi:type="Triangle">
     <identifier>T6</identifier>
-    <area>0</area>
-    <sideA>5</sideA>
+    <area>3.9</area>
+    <sideA>3</sideA>
+    <sideB>3</sideB>
+    <sideC>3</sideC>
+    <Type>1</Type>
+  </Shape>
+  <Shape xsi:type="Triangle">
+    <identifier>T7</identifier>
+    <area>11.52</area>
+    <sideA>6</sideA>
     <sideB>5</sideB>
     <sideC>6</sideC>
-    <Type>1</Type>
+    <Type>2</Type>
+  </Shape>
+  <Shape xsi:type="Triangle">
+    <identifier>T8</identifier>
+    <area>12.73</area>
+    <sideA>3</sideA>
+    <sideB>4</sideB>
+    <sideC>5</sideC>
+    <Type>3</Type>
   </Shape>
 </ArrayOfShape>

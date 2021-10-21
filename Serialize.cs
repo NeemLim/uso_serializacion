@@ -12,10 +12,9 @@ namespace uso_serializacion
     {
         static void Main(string[] args)
         {
-
+            var XmlSerializer = new XmlSerializer(typeof(List<Shape>));
             #region Variables
             string shapeListFilePath = Combine(CurrentDirectory, "ShapeList.xml");
-            var XmlSerializer = new XmlSerializer(typeof(List<Shape>));
             char choice = 'x';
             bool correctInput = false;
             #endregion
@@ -48,14 +47,8 @@ namespace uso_serializacion
                     int shapesToGenerate = GetIntInput();
                     var shapeList = new List<Shape>();
                     #endregion
-                    #region LoadXML
-                    //Check if shapes.xml exists, deserialize and load it to current list of shapes.
-                    if (File.Exists(shapeListFilePath) == true)
-                    {
-                        using (FileStream xmlLoad = File.Open(shapeListFilePath, FileMode.Open))
-                            shapeList = (List<Shape>)XmlSerializer.Deserialize(xmlLoad);
-                    }
-                    #endregion
+
+                    DeserializeLoadXML(shapeListFilePath, ref shapeList);
 
                     #region CreateShape
                     for (int N = 0; N < shapesToGenerate; N++)
@@ -68,10 +61,7 @@ namespace uso_serializacion
                     }
                     #endregion
 
-                    #region Serialize
-                    using (FileStream stream = new FileStream(shapeListFilePath, FileMode.Create))
-                        XmlSerializer.Serialize(stream, shapeList);
-                    #endregion
+                    SerializeList(shapeListFilePath, ref shapeList); 
 
                     break;
 
@@ -85,7 +75,7 @@ namespace uso_serializacion
                         WriteLine("No file to delete.");
                     break;
 
-                case '3':
+                case '3': //Get shape area
                     #region AreaMenu
                     do
                     {
@@ -106,20 +96,16 @@ namespace uso_serializacion
 
                     } while (correctInput == false);
                     #endregion
-
-                    List<Shape> loadedShapes;
+                    List<Shape> loadedShapes = null;
+                    DeserializeLoadXML(shapeListFilePath, ref loadedShapes); //Load current list
                     #region GetArea
-                    using (FileStream xmlLoad = File.Open(shapeListFilePath, FileMode.Open))
-                    {
-                        loadedShapes = (List<Shape>)XmlSerializer.Deserialize(xmlLoad);
-                    }
                     switch (choice)
                     {
-                        case '1':
+                        case '1': //Area of all shapes
                             ReadArea(ref loadedShapes);
                             break;
 
-                        case '2':
+                        case '2': //Specific shape type
                             #region TriangleMenu
                             Type shapeType = SelectShapeType();
                             if (shapeType == typeof(Triangle))
@@ -150,26 +136,44 @@ namespace uso_serializacion
                             }
                             else //Rectangle or circle type.
                                 ReadArea(ref loadedShapes, shapeType);
-
-
                             break;
-                        case '3':
+
+                        case '3': //Area by shape Index
                             string userShapeId = UserShapeId();
-                            ReadArea(ref loadedShapes);
+                            ReadArea(ref loadedShapes, userShapeId);
                             /* else
                                 WriteLine($"Shape with ID = {userShapeId}  was not found"); */
                             break;
                     }
                     #endregion
+                    
+                    SerializeList(shapeListFilePath, ref loadedShapes); //Serialize area changes.
 
                     break;
 
                 case '0':
                     WriteLine("\nThank you, goodbye.");
                     return;
-
-
             }
+        }
+
+
+
+        static void DeserializeLoadXML(string path, ref List<Shape> list)
+        {
+            var XmlSerializer = new XmlSerializer(typeof(List<Shape>));
+            //Check if shapes.xml exists, deserialize and load it to current list of shapes.
+            if (File.Exists(path) == true)
+            {
+                using (FileStream xmlLoad = File.Open(path, FileMode.Open))
+                    list = (List<Shape>)XmlSerializer.Deserialize(xmlLoad);
+            }
+        }
+        static void SerializeList(string path, ref List<Shape> list)
+        {
+            var XmlSerializer = new XmlSerializer(typeof(List<Shape>));
+            using (FileStream stream = new FileStream(path, FileMode.Create))
+                XmlSerializer.Serialize(stream, list);
         }
 
         static void createShape(ref Shape chosenShape, int itemCount)
@@ -198,8 +202,6 @@ namespace uso_serializacion
 
             //Set ID for shape, first char + total item count.
             chosenShape.identifier = char.ToString(choice) + itemCount.ToString();
-
-
             WriteLine("");
         }
 
@@ -239,6 +241,16 @@ namespace uso_serializacion
                 WriteLine($"Area of {item.identifier} is equal to {item.GetArea()} square units.");
         }
 
+        static void ReadArea(ref List<Shape> loadedShapes, string shapeId)
+        {
+            foreach (var item in loadedShapes)
+                if (item.identifier.Equals(shapeId))
+                {
+                WriteLine($"Area of {item.identifier} is equal to {item.GetArea()} square units.");
+                break; 
+                }
+        }
+
         static void ReadArea(ref List<Shape> loadedShapes, Type shapeType)
         {
             foreach (var item in loadedShapes)
@@ -246,10 +258,10 @@ namespace uso_serializacion
                     WriteLine($"Area of {item.identifier} is equal to {item.GetArea()} square units.");
 
         }
-        
+
         static void ReadArea(ref List<Shape> loadedShapes, Type shapeType, char choice)
         {
-            int triangleType = (int)choice;
+            int triangleType = choice - '0'; //Resta 48 y da el valor numerico.
             foreach (var item in loadedShapes)
                 if (item.GetType().Equals(shapeType)) //Matches with selected type.
                 {
