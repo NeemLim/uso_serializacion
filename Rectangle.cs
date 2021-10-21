@@ -1,4 +1,6 @@
 using static System.Console;
+using static System.Math; 
+
 namespace uso_serializacion
 {
     public class Rectangle : Shape
@@ -14,7 +16,9 @@ namespace uso_serializacion
         }
         public override void GetArea()
         {
-            throw new System.NotImplementedException();
+            //A = π * r^2
+            area = lenght * width; 
+            area = Round(area, 2); 
         }
 
 

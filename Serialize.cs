@@ -32,7 +32,7 @@ namespace uso_serializacion
 
                 correctInput = choice switch
                 {
-                    //ASCII Value of Chars 1 to 3.
+                    //ASCII Value of Chars 0 to 3.
                     var x when (x >= 48 & x <= 51) => true,
                     _ => false,
                 };
@@ -86,33 +86,73 @@ namespace uso_serializacion
                     break;
 
                 case '3':
-                    #region deserialize
+                    #region AreaMenu
+                    do
+                    {
+                        WriteLine("\n --- Area menu --- ");
+                        WriteLine("1 = Area of all shapes");
+                        WriteLine("2 = Area of a specific shape type");
+                        WriteLine("3 = Area by shape index");
+                        Write(">Choice: ");
+                        choice = ReadKey().KeyChar;
+
+                        correctInput = choice switch
+                        {
+                            //ASCII Value of Chars 1 to 3.
+                            var x when (x >= 49 & x <= 51) => true,
+                            _ => false,
+                        };
+                        WriteLine("");
+
+                    } while (correctInput == false);
+                    #endregion
+
+                    List<Shape> loadedShapes;
+                    #region GetArea
                     using (FileStream xmlLoad = File.Open(shapeListFilePath, FileMode.Open))
                     {
                         // deserialize and cast the object graph into a List of Person 
-                        var loadedShapes = (List<Shape>)XmlSerializer.Deserialize(xmlLoad);
-                        foreach (var item in loadedShapes)
-                        {
-                            if (item.GetType().Equals(typeof(Circle)))
+                        loadedShapes = (List<Shape>)XmlSerializer.Deserialize(xmlLoad);
+                    }
+                    switch (choice)
+                    {
+                        case '1':
+                            foreach (var item in loadedShapes)
                             {
                                 item.GetArea();
                                 WriteLine($"Area of {item.identifier} is equal to {item.area} square units.");
                             }
+                            break;
 
-                        }
+                        case '2':
+                            Type shapeType = SelectShapeType();
+                            foreach (var item in loadedShapes)
+                            {
+                                if (item.GetType().Equals(shapeType)) //Matches with selected type.
+                                {
+                                item.GetArea();
+                                WriteLine($"Area of {item.identifier} is equal to {item.area} square units.");
+                                }
+                            }
+                        break; 
+
                     }
+
                     #endregion
-                    break; 
+
+                    break;
 
                 case '0':
                     WriteLine("\nThank you, goodbye.");
                     return;
+
+
             }
-
-
-
-
         }
+
+
+
+
 
         static void createShape(ref Shape chosenShape, int itemCount)
         {
@@ -175,7 +215,35 @@ namespace uso_serializacion
             return userInput;
         }
 
+        static Type SelectShapeType()
+        {
+            Type shapeType;
+            char choice = 'x';
+            WriteLine("--- Shape Menu --- ");
+            WriteLine("C = Circles");
+            WriteLine("R = Rectangles");
+            WriteLine("T = Triangles");
+            do
+            {
+                WriteLine("Select a shape type.");
+                Write("Shape choice: ");
+                choice = char.ToUpper(ReadKey().KeyChar);
 
+                shapeType = choice switch
+                {
+                    'C' => typeof(Circle),
+                    'R' => typeof(Rectangle),
+                    'T' => typeof(Triangle),
+                    _ => null,
+                };
+
+            } while (shapeType == null);
+
+            WriteLine("");
+
+            return shapeType;
+
+        }
 
     }
 

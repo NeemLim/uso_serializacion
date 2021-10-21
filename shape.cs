@@ -19,18 +19,21 @@ namespace uso_serializacion
         public double UserInput()
         {
             bool isValidDouble = false;
-            double UserInput = 0;
+            double userInput = 0;
             do
             { //Loop to get the desired input.
                 //Checks for a double.
-                Write("Type a valid double type value: ");
+                Write("Type a positive double type value: ");
                 isValidDouble = double.TryParse(
-                    ReadLine(), out UserInput
+                    ReadLine(), out userInput
                 );
+
+                if (userInput < 0)
+                    isValidDouble = false;  //sets flag false to avoid the exiting loop.
 
             } while (isValidDouble == false);
 
-            return UserInput;
+            return userInput;
         }
     }
 

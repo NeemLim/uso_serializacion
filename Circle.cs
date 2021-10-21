@@ -1,5 +1,4 @@
 
-using System;
 using static System.Console;
 using static System.Math; 
 
@@ -17,7 +16,7 @@ namespace uso_serializacion
         {
             //A = π * r^2
             area = radius * radius * PI; 
-            Round(area, 2); 
+            area = Round(area, 2); 
         }
 
     }
