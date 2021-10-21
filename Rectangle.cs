@@ -1,11 +1,17 @@
-using System;
-
+using static System.Console;
 namespace uso_serializacion
 {
-    [Serializable]
     public class Rectangle : Shape
     {
-        public int lenght { get; set; }
-        public int width { get; set; }
+        public override void getParamaters()
+        {
+            WriteLine("Input the lenght of the rectangle.");
+            lenght = UserInput();
+            WriteLine("Input the lenght of the rectangle.");
+            width = UserInput();
+        }
+
+        public double lenght { get; set; }
+        public double width { get; set; }
     }
 }

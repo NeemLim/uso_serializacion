@@ -1,10 +1,15 @@
-using System;
+using static System.Console;
 
 namespace uso_serializacion
 {
-    [Serializable]
     public class Circle : Shape
-    {   
-        public int radium { get; set; }
+    {
+        public double radium { get; set; }
+        public override void getParamaters()
+        {
+            WriteLine("Input the radium of the circle.");
+            radium = UserInput(); 
+        }
+
     }
 }
