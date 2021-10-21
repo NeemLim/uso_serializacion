@@ -3,7 +3,10 @@ namespace uso_serializacion
 {
     public class Triangle : Shape
     {
-        public override void getParamaters()
+        public double sideA { get; set; }
+        public double sideB { get; set; }
+        public double sideC { get; set; }
+        public override void GetParamaters()
         {
             WriteLine("Input the side A of the triangle.");
             sideA = UserInput();
@@ -12,8 +15,10 @@ namespace uso_serializacion
             WriteLine("Input the side C of the triangle.");
             sideC = UserInput();
         }
-        public double sideA { get; set; }
-        public double sideB { get; set; }
-        public double sideC { get; set; }
+        public override void GetArea()
+        {
+            throw new System.NotImplementedException();
+        }
+
     }
 }

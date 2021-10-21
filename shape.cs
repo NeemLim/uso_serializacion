@@ -12,7 +12,9 @@ namespace uso_serializacion
     public abstract class Shape
     {
         public string identifier { get; set; }
-        public abstract void getParamaters();
+        public double area { get; set; }
+        public abstract void GetParamaters();
+        public abstract void GetArea();
 
         public double UserInput()
         {

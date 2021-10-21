@@ -18,6 +18,8 @@ namespace uso_serializacion
             char choice = 'x';
             bool correctInput = false;
             #endregion
+
+            #region MainMenu
             do
             {
                 WriteLine("\n --- Main menu --- ");
@@ -36,6 +38,7 @@ namespace uso_serializacion
                 };
                 WriteLine("");
             } while (correctInput == false);
+            #endregion
 
             switch (choice)
             {
@@ -60,7 +63,7 @@ namespace uso_serializacion
                         Shape userShape = null;
                         int shapeCount = shapeList.Count;
                         createShape(ref userShape, shapeCount);
-                        userShape.getParamaters();
+                        userShape.GetParamaters();
                         shapeList.Add(userShape);
                     }
                     #endregion
@@ -87,14 +90,19 @@ namespace uso_serializacion
                     using (FileStream xmlLoad = File.Open(shapeListFilePath, FileMode.Open))
                     {
                         // deserialize and cast the object graph into a List of Person 
-                        var loadedPeople = (List<Shape>)XmlSerializer.Deserialize(xmlLoad);
-                        foreach (Circle item in loadedPeople)
+                        var loadedShapes = (List<Shape>)XmlSerializer.Deserialize(xmlLoad);
+                        foreach (var item in loadedShapes)
                         {
-                            WriteLine(item.radium);
+                            if (item.GetType().Equals(typeof(Circle)))
+                            {
+                                item.GetArea();
+                                WriteLine($"Area of {item.identifier} is equal to {item.area} square units.");
+                            }
+
                         }
                     }
                     #endregion
-                    break;
+                    break; 
 
                 case '0':
                     WriteLine("\nThank you, goodbye.");
