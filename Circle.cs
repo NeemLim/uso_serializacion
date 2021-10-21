@@ -2,7 +2,8 @@ using System;
 
 namespace uso_serializacion
 {
-    public class circle
+    [Serializable]
+    public class Circle : Shape
     {   
         public int radium { get; set; }
     }

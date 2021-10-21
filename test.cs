@@ -13,28 +13,29 @@ namespace uso_serializacion
         static void Main(string[] args)
         {      
             string path = Combine(CurrentDirectory, "shapes.xml");
-            var xs = new XmlSerializer(typeof(List<circle>));
-            List<circle> circulos = new List<circle>();
+            var xs = new XmlSerializer(typeof(List<Shape>));
+            
+            var figuras = new List<Shape>();
             WriteLine("Hello World!");
-            var circleHolder = new circle();
+            var circleHolder = new Circle();
             circleHolder.radium = 13;
             WriteLine($"{circleHolder.radium}");
             
           
-            using (FileStream xmlLoad = File.Open(path, FileMode.Open))
+             using (FileStream xmlLoad = File.Open(path, FileMode.Open))
             {
                 // deserialize and cast the object graph into a List of Person 
-                circulos = (List<circle>)xs.Deserialize(xmlLoad);
-            }
+                figuras = (List<Shape>)xs.Deserialize(xmlLoad);
+            } 
 
-            circulos.Add(circleHolder); 
+            figuras.Add(circleHolder); 
 
 
             #region serialize
             //using (FileStream stream = File.Create(path)) //crear archivo
             using (FileStream stream = new FileStream(path, FileMode.Create)) //añadir al archivo
             {
-                xs.Serialize(stream, circulos);
+                xs.Serialize(stream, figuras);
             }
             #endregion
           
@@ -43,11 +44,10 @@ namespace uso_serializacion
             using (FileStream xmlLoad = File.Open(path, FileMode.Open))
             {
                 // deserialize and cast the object graph into a List of Person 
-                var loadedPeople = (List<circle>)xs.Deserialize(xmlLoad);
-                foreach (var item in loadedPeople)
+                var loadedPeople = (List<Shape>)xs.Deserialize(xmlLoad);
+                foreach (Circle item in loadedPeople)
                 {
-                    WriteLine("Radio es {0}",
-                      item.radium);
+                    WriteLine(item.radium);
                 }
             }
             #endregion
