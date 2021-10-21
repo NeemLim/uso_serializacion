@@ -1,4 +1,15 @@
 <?xml version="1.0"?>
-<circle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <radium>12</radium>
-</circle>
+<ArrayOfCircle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <circle>
+    <radium>13</radium>
+  </circle>
+  <circle>
+    <radium>13</radium>
+  </circle>
+  <circle>
+    <radium>13</radium>
+  </circle>
+  <circle>
+    <radium>13</radium>
+  </circle>
+</ArrayOfCircle>
